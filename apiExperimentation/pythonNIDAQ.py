@@ -21,6 +21,18 @@ class nidaqmxWrappers:
             print(device)
 
 
+    def printDeviceName(self):
+
+        system = self.system
+
+        for device in system.devices:
+
+            print(device)
+            print(device.ai_physical_chans[0].name)
+
+            print(device.ai_physical_chans)
+
+
 
 class test:
 
@@ -45,6 +57,21 @@ class test:
 
         print(' ')
 
+    def testPrintDeviceName(self):
+
+        print(' ')
+
+        import pythonNIDAQ
+        from pythonNIDAQ import nidaqmxWrappers
+
+        nidaqObj = nidaqmxWrappers()
+
+        nidaqObj.buildSystem()
+        nidaqObj.printDeviceName()
+
+        print('test complete')
+
+        print(' ')
 
 
 
@@ -118,12 +145,12 @@ def printHelp():
     print('self = workspace()')
 
     print(' ')
-    print('testObj = self.test()')
+    print('testObj = self.getTestObj()')
 
     print(' ')
     print('to load the nidaqmxWrappers object use:')
 
-    print('nidaqmxWrapperObj = self.nidaqmxWrappers()')
+    print('nidaqmxWrapperObj = self.getNidaqmxWrappersObj()')
 
 
 printHelp()
