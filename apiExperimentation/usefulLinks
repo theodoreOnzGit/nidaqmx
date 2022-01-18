@@ -15,3 +15,6 @@ https://knowledge.ni.com/KnowledgeArticleDetails?id=kA03q000000YGr9CAG&l=en-US
 
 nidaqmx github examples
 https://github.com/ni/nidaqmx-python/tree/master/nidaqmx_examples
+
+nidaqmx github test suite (more examples)
+https://github.com/ni/nidaqmx-python/tree/master/nidaqmx/tests
