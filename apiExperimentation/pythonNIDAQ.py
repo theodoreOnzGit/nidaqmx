@@ -102,3 +102,30 @@ class workspace:
         self.nidaqmxWrappers = nidaqmxWrappers
         self.test = test
 
+
+def printHelp():
+
+    print('hello, welcome to the pythonDAQmxWrapper module')
+
+    print(' ')
+
+    print('to load test modules use:')
+
+    print(' ')
+
+    print('import pythonNIDAQ')
+    print('from pythonNIDAQ import workspace')
+    print('self = workspace()')
+
+    print(' ')
+    print('testObj = self.test()')
+
+    print(' ')
+    print('to load the nidaqmxWrappers object use:')
+
+    print('nidaqmxWrapperObj = self.nidaqmxWrappers()')
+
+
+printHelp()
+
+
