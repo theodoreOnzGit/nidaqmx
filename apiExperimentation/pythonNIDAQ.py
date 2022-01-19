@@ -29,9 +29,24 @@ class nidaqmxWrappers:
 
             print(device)
 
-            print(device.ai_physical_chans)
+            # uncomment the code below to see what kind of object
+            # ai_physical_chans is:
+
+            # print(device.ai_physical_chans)
+            # print(device.ai_physical_chans[0].name)
+
+            # here we are printing analog inputs (ai) phyiscal channels
 
             for physChannel in device.ai_physical_chans:
+
+                print(physChannel.name)
+                print(type(physChannel.name))
+
+            # uncomment the code below to see what kind of object
+            # ao_physical_chans is:
+            # print(device.ao_physical_chans)
+
+            for physChannel in device.ao_physical_chans:
 
                 print(physChannel.name)
                 print(type(physChannel.name))
