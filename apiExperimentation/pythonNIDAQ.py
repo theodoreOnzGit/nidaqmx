@@ -28,9 +28,13 @@ class nidaqmxWrappers:
         for device in system.devices:
 
             print(device)
-            print(device.ai_physical_chans[0].name)
 
             print(device.ai_physical_chans)
+
+            for physChannel in device.ai_physical_chans:
+
+                print(physChannel.name)
+                print(type(physChannel.name))
 
 
 
