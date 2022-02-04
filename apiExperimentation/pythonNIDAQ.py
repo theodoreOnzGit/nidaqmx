@@ -4,6 +4,8 @@ class nidaqmxWrappers:
 
         print('welcome to nidaqmxWrapper class')
 
+        self.buildNIDAQmxModule()
+
 
     def buildSystem(self):
 
@@ -11,6 +13,16 @@ class nidaqmxWrappers:
         system = nidaqmx.system.System.local()
 
         self.system = system
+
+
+    def buildNIDAQmxModule(self):
+
+        import nidaqmx
+        self.nidaqmx = nidaqmx
+
+        print(' ')
+        print('NIDAQmx module imported, use self.nidaqmx to access it')
+        print(' ')
 
     def printDevices(self):
 
@@ -52,6 +64,17 @@ class nidaqmxWrappers:
                 print(type(physChannel.name))
 
 
+    def returnTaskObj(self):
+
+        nidaqmx = self.nidaqmx
+
+        taskObj = nidaqmx.Task()
+
+        return taskObj
+
+        
+
+
 
 class test:
 
@@ -91,6 +114,42 @@ class test:
         print('test complete')
 
         print(' ')
+
+    def getNidaqObj(self):
+
+        from importlib import reload
+
+        import pythonNIDAQ
+        reload(pythonNIDAQ)
+        from pythonNIDAQ import nidaqmxWrappers
+
+        nidaqObj = nidaqmxWrappers()
+
+        return nidaqObj
+
+
+    def testTask(self):
+
+        nidaqObj = self.getNidaqObj()
+
+        nidaqObj.buildSystem()
+
+        taskObj = nidaqObj.returnTaskObj()
+
+        print(type(taskObj))
+        print(taskObj)
+
+        #taskObj.ai_channels.add_ai_voltage_chan('tempSensor1/ai7')
+        #taskObj.read()
+
+        taskObj.ai_channels.add_ai_thrmstr_chan_vex('tempSensor1/ai6')
+        taskObj.read()
+
+        
+
+
+
+
 
 
 
@@ -160,8 +219,7 @@ def printHelp():
     print(' ')
 
     print('import pythonNIDAQ')
-    print('from pythonNIDAQ import workspace')
-    print('self = workspace()')
+    print('self = pythonNIDAQ.workspace()')
 
     print(' ')
     print('testObj = self.getTestObj()')
