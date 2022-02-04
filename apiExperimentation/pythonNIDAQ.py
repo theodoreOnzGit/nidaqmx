@@ -139,11 +139,11 @@ class test:
         print(type(taskObj))
         print(taskObj)
 
-        #taskObj.ai_channels.add_ai_voltage_chan('tempSensor1/ai7')
-        #taskObj.read()
-
-        taskObj.ai_channels.add_ai_thrmstr_chan_vex('tempSensor1/ai6')
+        taskObj.ai_channels.add_ai_voltage_chan('tempSensor1/ai7')
         taskObj.read()
+
+        #taskObj.ai_channels.add_ai_thrmstr_chan_vex('tempSensor1/ai6')
+        #taskObj.read()
 
         
 
