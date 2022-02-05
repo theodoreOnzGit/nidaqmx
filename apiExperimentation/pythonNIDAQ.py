@@ -5,6 +5,7 @@ class nidaqmxWrappers:
         print('welcome to nidaqmxWrapper class')
 
         self.buildNIDAQmxModule()
+        self.buildSystem()
 
 
     def buildSystem(self):
@@ -71,6 +72,28 @@ class nidaqmxWrappers:
         taskObj = nidaqmx.Task()
 
         return taskObj
+
+    def getTaskNames(self):
+
+        nidaqmx = self.nidaqmx
+
+        taskPropertyObj = nidaqmx.system._collections.persisted_task_collection.PersistedTaskCollection.task_names
+
+        taskNames = taskPropertyObj.__get__(taskPropertyObj)
+
+        return taskNames
+
+
+    def getTaskObjects(self):
+
+        nidaqmx = self.nidaqmx
+
+        system = self.system
+
+        taskObj = system.tasks
+
+        return taskObj
+
 
         
 
@@ -144,6 +167,96 @@ class test:
 
         #taskObj.ai_channels.add_ai_thrmstr_chan_vex('tempSensor1/ai6')
         #taskObj.read()
+
+    def testReadExistingTask(self):
+
+        nidaqObj = self.getNidaqObj()
+
+        taskNames = nidaqObj.getTaskNames()
+
+        print(taskNames)
+
+        # here we read the names of the persisted tasks
+
+        taskObjList = nidaqObj.getTaskObjects()
+
+        for persistedTask in taskObjList:
+
+            print(persistedTask)
+            # we need to load the persisted task first before we read
+
+            #task = persistedTask.load()
+            
+            # we can't load it... because it conflicts with existing task name
+            # you usually need to close NI max in order to use this properly
+            #task.read()
+
+            print(persistedTask)
+
+            task = persistedTask.load()
+
+            print(task.name)
+
+            # the following part is manual, you have to set it properly in nimax
+
+            if task.name == 'MyTemperatureTask':
+                #task.start()
+                taskValue = task.read()
+                print(type(taskValue))
+                print(taskValue)
+
+            if task.name == 'moduleATemperatureReading':
+                #task.start()
+                taskValue = task.read()
+                print(type(taskValue))
+                print(taskValue)
+
+
+            task.close()
+
+            # note that task objects MUST be closed properly everytime
+            # otherwise we will get errors
+            # then we will either need to use the reset_device()
+            # or restart python
+            # in order to clear the memory properly
+
+        print('task read list complete')
+
+
+        print('now we are reading the existing tasks and reading them manually')
+        print(' ')
+        print(' ')
+
+        
+        persistedTask = taskObjList[1]
+
+        task = persistedTask.load()
+
+        print(task)
+        task.start()
+        a = task.read()
+        print(type(a))
+        print(a)
+        task.close()
+
+        # i can't load persisted tasks...
+        #task = persistedTask.load()
+        #task.read()
+
+        import nidaqmx
+
+        #inStream = nidaqmx.task.InStream()
+
+        # we read our persisted tasks!
+
+
+
+
+
+
+
+
+
 
         
 
