@@ -105,6 +105,12 @@ class test:
 
         print('welcome to the test class')
 
+        print(' ')
+        print('to get nidaqObj, use:')
+        print('nidaqObj = testObj.getNidaqObj()')
+
+
+
 
     def testPrintDevices(self):
 
@@ -165,6 +171,12 @@ class test:
         taskObj.ai_channels.add_ai_thrmstr_chan_vex('tempSensor1/ai7')
         reading = taskObj.read()
 
+        print('first read')
+        print(reading)
+
+        print(' ')
+        print('next we use the task obj to read readings 100x')
+
         # the readings before were okay! but i didn't print out the outputs
         for i in range(100):
             reading = taskObj.read()
@@ -190,7 +202,6 @@ class test:
 
         for persistedTask in taskObjList:
 
-            print(persistedTask)
             # we need to load the persisted task first before we read
 
             #task = persistedTask.load()
